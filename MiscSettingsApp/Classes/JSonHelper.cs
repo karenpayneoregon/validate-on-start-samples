@@ -4,32 +4,26 @@ namespace MiscSettingsApp.Classes;
 public static class JSonHelper
 {
     /// <summary>
-    /// Serialize list to a json file
+    /// Serializes a list of objects to a JSON file.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="sender">type to serialize</param>
-    /// <param name="fileName">Filename without extension</param>
+    /// <typeparam name="T">The type of objects in the list.</typeparam>
+    /// <param name="sender">The list of objects to serialize.</param>
+    /// <param name="fileName">The name of the file (without extension) where the JSON will be saved.</param>
     public static void ToJson<T>(this List<T> sender, string fileName)
     {
         File.WriteAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{fileName}.json"),
-            JsonSerializer.Serialize(sender, new JsonSerializerOptions
-            {
-                WriteIndented = true 
-            }));
+            JsonSerializer.Serialize(sender, SerializerOptions));
     }
     /// <summary>
-    /// Serialize array to a json file
+    /// Serializes an array of objects to a JSON file.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="sender">type to serialize</param>
-    /// <param name="fileName">Filename without extension</param>
+    /// <typeparam name="T">The type of objects in the array.</typeparam>
+    /// <param name="sender">The array of objects to serialize.</param>
+    /// <param name="fileName">The name of the file (without extension) where the JSON will be saved.</param>
     public static void ToJson<T>(this T[] sender, string fileName)
     {
         File.WriteAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{fileName}.json"),
-            JsonSerializer.Serialize(sender, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            }));
+            JsonSerializer.Serialize(sender, SerializerOptions));
     }
 
     /// <summary>
@@ -39,12 +33,15 @@ public static class JSonHelper
     /// <param name="fileName">Filename without extension</param>
     public static void ToJson(this string sender, string fileName)
     {
-        var json = JsonSerializer.Serialize(sender, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
+        var json = JsonSerializer.Serialize(sender, SerializerOptions);
         
         File.WriteAllText($"{fileName}.json", sender);
     }
+
+    private static JsonSerializerOptions SerializerOptions =>
+        new()
+        {
+            WriteIndented = true
+        };
 
 }

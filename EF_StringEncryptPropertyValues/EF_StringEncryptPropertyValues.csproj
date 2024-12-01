@@ -4,6 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>disable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<SdkAnalysisLevel>8.0.100</SdkAnalysisLevel>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,7 +17,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="ConfigurationLibrary" Version="1.0.6" />
-		<PackageReference Include="Inferno" Version="1.6.4" />
+		<PackageReference Include="Inferno" Version="1.6.6" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,16 +33,16 @@
 		<!-- ReSharper disable once VulnerablePackage -->
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
 		<PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
-		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
 	</ItemGroup>
 
 
 	<ItemGroup>
-		<PackageReference Include="SeriLogThemesLibrary" Version="1.0.0.1" />
-		<PackageReference Include="Bogus" Version="34.0.2" />
+		<PackageReference Include="SeriLogThemesLibrary" Version="1.0.0.2" />
+		<PackageReference Include="Bogus" Version="35.6.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -51,7 +52,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
 	</ItemGroup>
 
 	<ItemGroup>

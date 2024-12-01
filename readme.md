@@ -1,8 +1,13 @@
 # ASP.NET Core startup validation
 
-![s](assets/Figure6.png)
+
 
 Learn the basics for validation on startup of a ASP.NET Core/Razor Pages for strongly typed configuration objects and a quirk when dealing with enumerations.
+
+> **Note**
+> Although the focus overall is validating values in appsettings.json, the main reason stems from a quirk with reading enum values as presented in example 3.
+
+![s](assets/Figure6.png)
 
 The main approach is with [ValidateOnStart](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.optionsbuilderextensions.validateonstart?view=dotnet-plat-ext-8.0) which enforces options validation check on start rather than in runtime.
 
@@ -134,6 +139,23 @@ public class Program
 The following is a quirk when dealing with enumerations which was taken from the following Stackoverflow [question](https://stackoverflow.com/questions/77517833/invalid-enum-value-in-a-list-doesnt-get-caught-in-net-configuration-but-get-it).
 
 For this example, there are two approaches. The first is using ValidateOnStart and the second method will use code to create the enum using a T4 template to generate the settings which can be dropped into appsettings.json and can use ValidateOnStart as a secondary check.
+
+**IPORTANT**
+
+When running the code, validation is setup to fail. because for the first element under MiscSettings TheEnum value is One1 while valid values are One, Two and Three where TheEnum is generated via a T4 template in EnumLibrary class project.
+
+```json
+"MiscSettings": [
+  {
+    "Name": "Invalid",
+    "TheEnum": "One1"
+  },
+  {
+    "Name": "Valid",
+    "TheEnum": "Two"
+  }
+]
+```
 
 **Issue**
 
@@ -304,7 +326,7 @@ Screenshot
 ![image](assets/Figure5.png)
 
 
-### Spcial notes
+### Notes
 
 There are two versions of MiscSettings, the first for the web project and the second for reading data from the database. I did this rather fast and in hindsight could had done a better job and had one model.
 
