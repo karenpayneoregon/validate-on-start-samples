@@ -1,7 +1,7 @@
 using EF_StringEncryptPropertyValues.Classes;
 using EF_StringEncryptPropertyValues.Data;
 using EF_StringEncryptPropertyValues.Models;
-using EnumLibrary;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using static ConfigurationLibrary.Classes.ConfigurationHelper;
@@ -20,8 +20,8 @@ public class Program
         SetupLogging.Development();
 
         
-        builder.Services.AddOptions<Connectionstrings>()
-            .BindConfiguration(nameof(Connectionstrings))
+        builder.Services.AddOptions<ConnectionStrings>()
+            .BindConfiguration(nameof(ConnectionStrings))
             .ValidateDataAnnotations()
             .Validate(connections =>
             {
@@ -31,7 +31,18 @@ public class Program
                 }
 
                 SqlConnectionStringBuilder ssb = new(connections.DefaultConnection);
-                return !string.IsNullOrEmpty(ssb.InitialCatalog);
+
+                using var cn = new SqlConnection(ssb.ConnectionString);
+
+                try
+                {
+                    cn.Open();
+                    return true;
+                }
+                catch 
+                {
+                    return false;
+                }
 
             }, "Invalid connection string")
             .ValidateOnStart();
